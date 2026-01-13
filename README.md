@@ -4,16 +4,12 @@ Proyecto de ejemplo para **aprender React consumiendo una API** (peticiones HTTP
 
 La app se ejecuta con **Vite** y realiza llamadas a una API REST simulada usando **Axios**. Para el backend de prácticas se utiliza **json-server** con el fichero **`db.json`** incluido en el repositorio. :contentReference[oaicite:1]{index=1}
 
----
-
 ## Objetivo didáctico
 
 - Practicar **componentes**, **estado**, **props** y flujo de datos.
 - Aprender a **consumir una API REST** desde React (GET/POST/PUT/PATCH/DELETE).
 - Entender la separación **frontend (React)** / **backend simulado (json-server)**.
 - Familiarizarse con el flujo de trabajo típico con **Vite**.
-
----
 
 ## Tecnologías
 
@@ -23,14 +19,11 @@ La app se ejecuta con **Vite** y realiza llamadas a una API REST simulada usando
 - json-server (API REST falsa a partir de un JSON)
 - ESLint (configuración de linting)
 
----
-
 ## Requisitos
 
 - Node.js (recomendado: versión LTS)
 - npm (incluido con Node.js)
 
----
 
 ## Instalación
 
@@ -38,15 +31,13 @@ La app se ejecuta con **Vite** y realiza llamadas a una API REST simulada usando
    ```bash
    git clone https://github.com/sambrista/dwec-react-task-list-example.git
    cd dwec-react-task-list-example
-````
+   ```
 
 2. Instala dependencias:
 
    ```bash
    npm install
    ```
-
----
 
 ## Levantar la API (json-server)
 
@@ -69,8 +60,6 @@ npm i -g json-server
 json-server --watch db.json --port 3001
 ```
 
----
-
 ## Levantar el frontend (React + Vite)
 
 En otra terminal:
@@ -82,8 +71,6 @@ npm run dev
 Por defecto, Vite suele servir en:
 
 * `http://localhost:5173`
-
----
 
 ## Orden recomendado de ejecución
 
@@ -99,8 +86,6 @@ Por defecto, Vite suele servir en:
    npm run dev
    ```
 
----
-
 ## Configuración de la URL de la API
 
 Si la aplicación no carga datos, revisa dónde está configurada la **base URL** de Axios (normalmente en algún fichero de `src/`).
@@ -114,8 +99,6 @@ Asegúrate de que:
 * El puerto coincide con el que usas al arrancar `json-server`.
 * El endpoint coincide con el recurso definido en `db.json`.
 
----
-
 ## Scripts habituales
 
 Los scripts exactos están definidos en `package.json`. ([GitHub][1])
@@ -125,15 +108,12 @@ Los más comunes en proyectos Vite suelen ser:
 * `npm run build` — build de producción
 * `npm run preview` — previsualización del build
 
----
-
 ## Estructura del proyecto (alto nivel)
 
 * `src/` — código React (componentes, hooks, servicios de API, etc.) ([GitHub][1])
 * `public/` — assets públicos ([GitHub][1])
 * `db.json` — “base de datos” para json-server ([GitHub][1])
 
----
 
 ## Problemas típicos y solución rápida
 
