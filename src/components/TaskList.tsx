@@ -9,13 +9,13 @@ type TaskListProps = {
 
 function TaskList({ tasks, onEdit, onDelete, saving }: TaskListProps) {
   return (
-    <ul>
+    <ul className="task-list">
       {tasks.map(task => (
         <li key={task.id}>
-          {task.title}
+          <span className="task-title">{task.title}</span>
           <div>
-            <button onClick={() => onEdit(task)} disabled={saving}>✏️</button>
-            <button onClick={() => onDelete(task.id)} disabled={saving}>❌</button>
+            <button className="edit" onClick={() => onEdit(task)} disabled={saving}>✏️</button>
+            <button className="delete" onClick={() => onDelete(task.id)} disabled={saving}>❌</button>
           </div>
         </li>
       ))}

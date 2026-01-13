@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Task } from '../types/Task';
 
 type TaskFormProps = {
-  onSubmit: (task:  Task | string) => void;
+  onSubmit: ((task: Task | string) => void);
   editingTask: Task | null;
   saving: boolean;
 };
@@ -10,17 +10,25 @@ type TaskFormProps = {
 function TaskForm({ onSubmit, editingTask, saving }: TaskFormProps) {
   const [title, setTitle] = useState(editingTask ? editingTask.title : '');
 
+useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title);
+    } else {
+      setTitle('');
+    }
+  }, [editingTask]);
+
   const handleTitleChange = (newTitle: string) => {
     setTitle(newTitle);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || editingTask == null) return;
+    if (!title.trim()) return;
 
     onSubmit(
       editingTask
-        ? { ...editingTask, title }
+        ? { ...editingTask, title } as Task
         : title
     );
   };

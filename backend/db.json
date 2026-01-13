@@ -1,0 +1,19 @@
+{
+  "tasks": [
+    {
+      "id": "2",
+      "title": "Tarea 1",
+      "completed": true
+    },
+    {
+      "id": "937a",
+      "title": "asfasf",
+      "completed": false
+    },
+    {
+      "id": "65f8",
+      "title": "Patata",
+      "completed": false
+    }
+  ]
+}

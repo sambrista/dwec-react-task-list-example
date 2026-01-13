@@ -38,12 +38,23 @@ function App() {
       });
   };
 
+
+
   // DELETE
   const deleteTask = (id: number) => {
     setSaving(true);
     taskService.delete(id)
       .then(() => setTasks(tasks.filter(t => t.id !== id)))
       .finally(() => setSaving(false));
+  };
+
+  // Handle both create and update operations
+  const handleSubmit = (input: string | Task) => {
+    if (typeof input === 'string') {
+      addTask(input);
+    } else {
+      updateTask(input);
+    }
   };
 
   if (loading) {
@@ -55,7 +66,7 @@ function App() {
       <h1>CRUD de Tareas</h1>
 
       <TaskForm
-        onSubmit={editingTask ? updateTask : addTask}
+        onSubmit={handleSubmit}
         editingTask={editingTask}
         saving={saving}
       />
