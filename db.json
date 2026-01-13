@@ -1,29 +1,14 @@
 {
   "tasks": [
     {
+      "id": "1",
+      "title": "Aprender React",
+      "completed": false
+    },
+    {
       "id": "2",
-      "title": "Tarea 1",
+      "title": "Usar APIs REST",
       "completed": true
-    },
-    {
-      "id": "937a",
-      "title": "Tarea 2",
-      "completed": false
-    },
-    {
-      "id": "65f8",
-      "title": "Patata",
-      "completed": false
-    },
-    {
-      "id": "532e",
-      "title": "Patatónes",
-      "completed": false
-    },
-    {
-      "id": "f78c",
-      "title": "burr",
-      "completed": false
     }
   ]
 }

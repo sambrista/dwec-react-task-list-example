@@ -1,22 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Task } from '../types/Task';
 
 type TaskFormProps = {
-  onSubmit: ((task: Task | string) => void);
+  onAdd: ((title: string) => void);
+  onEdit: ((task: Task) => void);
+  onCancelEdit: (() => void);
   editingTask?: Task | null;
   saving: boolean;
 };
 
-function TaskForm({ onSubmit, editingTask = null, saving }: TaskFormProps) {
+function TaskForm({ onAdd, onEdit, onCancelEdit, editingTask = null, saving }: TaskFormProps) {
   const [title, setTitle] = useState(editingTask ? editingTask.title : '');
-
-useEffect(() => {
-    if (editingTask) {
-      setTitle(editingTask.title);
-    } else {
-      setTitle('');
-    }
-  }, [editingTask]);
 
   const handleTitleChange = (newTitle: string) => {
     setTitle(newTitle);
@@ -26,11 +20,11 @@ useEffect(() => {
     e.preventDefault();
     if (!title.trim()) return;
 
-    onSubmit(
-      editingTask
-        ? { ...editingTask, title } as Task
-        : title
-    );
+    if (editingTask) {
+      onEdit({ ...editingTask, title } as Task);
+    } else {
+      onAdd(title);
+    }
   };
 
   return (
@@ -44,6 +38,7 @@ useEffect(() => {
       <button disabled={saving}>
         {saving ? 'Guardando...' : editingTask ? 'Actualizar' : 'Añadir'}
       </button>
+      {editingTask && <button disabled={saving} onClick={onCancelEdit}>Cancelar</button>}
     </form>
   );
 }

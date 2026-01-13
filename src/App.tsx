@@ -38,6 +38,11 @@ function App() {
       });
   };
 
+  // CANCELUPDATE
+  const cancelUpdateTask = () => {
+    setEditingTask(null);
+  };
+
   // DELETE
   const deleteTask = (id: number) => {
     setSaving(true);
@@ -46,41 +51,13 @@ function App() {
       .finally(() => setSaving(false));
   };
 
-  // --- NUEVO: Separar los formularios ---
-  const handleAddSubmit = (task: string | Task) => {
-    addTask(task as string);
-  };
-
-  const handleEditSubmit = (task: string | Task) => {
-    updateTask(task as Task);
-  };
-
   if (loading) {
     return <p>Cargando tareas...</p>;
   }
 
   return (
     <div className="container" style={{ display: 'flex', gap: '40px', padding: '40px', flexWrap: 'wrap' }}>
-      <div style={{ flex: 1, minWidth: '300px' }}>
-        <h2>Añadir Tarea</h2>
-        <TaskForm
-          onSubmit={handleAddSubmit}
-          saving={saving}
-          key="add-form" // clave distinta para evitar reutilización de estado
-        />
-      </div>
-
-      <div style={{ flex: 1, minWidth: '300px' }}>
-        <h2>Editar Tarea</h2>
-        <TaskForm
-          onSubmit={handleEditSubmit}
-          editingTask={editingTask}
-          saving={saving}
-          key={editingTask ? editingTask.id : 'edit-form'} // fuerza reinicio al cambiar tarea
-        />
-      </div>
-
-      <div style={{ width: '100%', marginTop: '40px' }}>
+          <div style={{ width: '100%' }}>
         <h2>Lista de Tareas</h2>
         <TaskList
           tasks={tasks}
@@ -89,6 +66,19 @@ function App() {
           saving={saving}
         />
       </div>
+      <div style={{ flex: 1, minWidth: '300px' }}>
+        <h2>{editingTask ? `Editar Tarea ${editingTask.title}` : 'Añadir Tarea'}</h2>
+
+      <TaskForm
+        onAdd={addTask}
+        onEdit={updateTask}
+        onCancelEdit={cancelUpdateTask}
+        editingTask={editingTask}
+        saving={saving}
+        key={editingTask ? editingTask.id : 'new'}
+      />
+      </div>
+
     </div>
   );
 }
