@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+# dwec-react-task-list-example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto de ejemplo para **aprender React consumiendo una API** (peticiones HTTP y CRUD básico) en un entorno moderno.
 
-Currently, two official plugins are available:
+La app se ejecuta con **Vite** y realiza llamadas a una API REST simulada usando **Axios**. Para el backend de prácticas se utiliza **json-server** con el fichero **`db.json`** incluido en el repositorio. :contentReference[oaicite:1]{index=1}
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Objetivo didáctico
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- Practicar **componentes**, **estado**, **props** y flujo de datos.
+- Aprender a **consumir una API REST** desde React (GET/POST/PUT/PATCH/DELETE).
+- Entender la separación **frontend (React)** / **backend simulado (json-server)**.
+- Familiarizarse con el flujo de trabajo típico con **Vite**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tecnologías
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React + TypeScript
+- Vite (dev server y build)
+- Axios (HTTP client)
+- json-server (API REST falsa a partir de un JSON)
+- ESLint (configuración de linting)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Requisitos
+
+- Node.js (recomendado: versión LTS)
+- npm (incluido con Node.js)
+
+---
+
+## Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/sambrista/dwec-react-task-list-example.git
+   cd dwec-react-task-list-example
+````
+
+2. Instala dependencias:
+
+   ```bash
+   npm install
+   ```
+
+---
+
+## Levantar la API (json-server)
+
+Este proyecto incluye el fichero `db.json` en la raíz. ([GitHub][1])
+
+### Opción A: usar json-server con npx (recomendado para clase)
+
+```bash
+npx json-server --watch db.json --port 3001
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+* API disponible en: `http://localhost:3001`
+* Los recursos disponibles dependen de las claves de `db.json` (por ejemplo: `/tasks`, `/todos`, etc.).
+  Consejo: abre `db.json` y fíjate en el nombre del array principal para saber el endpoint exacto.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Opción B: instalar json-server globalmente
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm i -g json-server
+json-server --watch db.json --port 3001
 ```
+
+---
+
+## Levantar el frontend (React + Vite)
+
+En otra terminal:
+
+```bash
+npm run dev
+```
+
+Por defecto, Vite suele servir en:
+
+* `http://localhost:5173`
+
+---
+
+## Orden recomendado de ejecución
+
+1. Terminal 1 (API):
+
+   ```bash
+   npx json-server --watch db.json --port 3001
+   ```
+
+2. Terminal 2 (frontend):
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## Configuración de la URL de la API
+
+Si la aplicación no carga datos, revisa dónde está configurada la **base URL** de Axios (normalmente en algún fichero de `src/`).
+
+Valores típicos:
+
+* `http://localhost:3001`
+
+Asegúrate de que:
+
+* El puerto coincide con el que usas al arrancar `json-server`.
+* El endpoint coincide con el recurso definido en `db.json`.
+
+---
+
+## Scripts habituales
+
+Los scripts exactos están definidos en `package.json`. ([GitHub][1])
+Los más comunes en proyectos Vite suelen ser:
+
+* `npm run dev` — entorno de desarrollo
+* `npm run build` — build de producción
+* `npm run preview` — previsualización del build
+
+---
+
+## Estructura del proyecto (alto nivel)
+
+* `src/` — código React (componentes, hooks, servicios de API, etc.) ([GitHub][1])
+* `public/` — assets públicos ([GitHub][1])
+* `db.json` — “base de datos” para json-server ([GitHub][1])
+
+---
+
+## Problemas típicos y solución rápida
+
+* **CORS / errores de red**: asegúrate de tener `json-server` arrancado antes que el frontend y revisa la URL/puerto.
+* **No aparece ningún listado**: confirma el endpoint (nombre del recurso) mirando `db.json`.
+* **Puerto ocupado**:
+
+  * Cambia el puerto de json-server: `--port 3002`
+  * O cambia el de Vite si fuera necesario: `npm run dev -- --port 5174`
