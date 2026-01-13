@@ -12,12 +12,17 @@
     },
     {
       "id": "65f8",
-      "title": "Patataxx",
+      "title": "Patata",
       "completed": false
     },
     {
       "id": "532e",
       "title": "Patatónes",
+      "completed": false
+    },
+    {
+      "id": "f78c",
+      "title": "burr",
       "completed": false
     }
   ]
