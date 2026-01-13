@@ -3,11 +3,11 @@ import type { Task } from '../types/Task';
 
 type TaskFormProps = {
   onSubmit: ((task: Task | string) => void);
-  editingTask: Task | null;
+  editingTask?: Task | null;
   saving: boolean;
 };
 
-function TaskForm({ onSubmit, editingTask, saving }: TaskFormProps) {
+function TaskForm({ onSubmit, editingTask = null, saving }: TaskFormProps) {
   const [title, setTitle] = useState(editingTask ? editingTask.title : '');
 
 useEffect(() => {
